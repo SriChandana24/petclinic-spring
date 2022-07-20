@@ -6,6 +6,13 @@ pipeline {
     
     stages {        
 
+        stage ('setup') {
+
+            steps {                
+                    sh 'mvn clean install'                
+            }
+        }
+
         stage ('test Stage') {
 
             steps {                
