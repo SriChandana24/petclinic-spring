@@ -11,14 +11,7 @@ pipeline {
             steps {                
                     sh 'mvn clean install'                
             }
-        }
-
-        stage ('test Stage') {
-
-            steps {                
-                    sh 'mvn test'                
-            }
-        }
+        }        
         
         stage('SonarQube Analysis') {
 
