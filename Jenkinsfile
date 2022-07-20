@@ -1,7 +1,7 @@
 pipeline {
     
     agent {
-            label 'test'
+            label 'maven'
         } 
     
     stages {
@@ -28,7 +28,7 @@ pipeline {
         stage('SonarQube Analysis') {
 
             steps{
-                sh 'mvn clean sonar:sonar -Dsonar.host.url=http://52.66.161.17:9000/   -Dsonar.login=sqa_6efb7be29058cb368f8fc097a44f939b21f75993 -Dsonar.login=admin -Dsonar.password=sonarqube -Dsonar.java.binaries=target'
+                sh 'mvn clean sonar:sonar -Dsonar.host.url=http://43.204.145.100:9000/   -Dsonar.login=sqa_6efb7be29058cb368f8fc097a44f939b21f75993 -Dsonar.login=admin -Dsonar.password=sonarqube -Dsonar.java.binaries=target'
             }
         }
         
@@ -36,13 +36,7 @@ pipeline {
             steps {                
                     sh 'mvn package'                
             }
-        }
-        
-        stage ('Deploy') {
-            steps {
-                sh 'ansible-playbook -i inv.ini main.yml'
-            }
-        }
+        }                
                 
     }
 
