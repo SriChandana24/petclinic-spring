@@ -35,8 +35,8 @@ pipeline {
 
         stage ('Artifactory Configuration') {
             steps {
-                sh 'curl -sSf -u admin:Artifactory1! -X PUT -T target/spring-petclinic-*-SNAPSHOT.jar http://13.233.159.66:8081/artifactory/pet-clinic/'
-                sh 'curl -sSf -u admin:Artifactory1! -X PUT -T target/spring-petclinic-*-SNAPSHOT.jar http://13.233.159.66:8081/artifactory/pet-clinic/spring-petclinic-${BUILD_NUMBER}-SNAPSHOT.jar'
+                sh 'curl -sSf -u admin:Artifactory1! -X PUT -T target/spring-petclinic-*-SNAPSHOT.jar http://3.110.222.216:8081/artifactory/pet-clinic/'
+                sh 'curl -sSf -u admin:Artifactory1! -X PUT -T target/spring-petclinic-*-SNAPSHOT.jar http://3.110.222.216:8081/artifactory/pet-clinic/spring-petclinic-${BUILD_NUMBER}-SNAPSHOT.jar'
             }
         }         
                 
