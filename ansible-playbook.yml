@@ -13,13 +13,13 @@
       become_user: root
 
     - name: install  Tomcat
-      yum: name=tomcat7 state=present
+      yum: name=tomcat state=present
 
     - name: Change ownership of Tomcat installation
       file: path=/usr/share/tomcat/ owner=tomcat group=tomcat state=directory recurse=yes
 
     - name: Start Tomcat
-      service: name=tomcat7 state=started enabled=yes
+      service: name=tomcat state=started enabled=yes
 
     - name: wait for tomcat to start
       wait_for: port={{http_port}}
@@ -28,4 +28,4 @@
       get_url: url=http://3.110.222.216:8082/pet-clinic/spring-petclinic-2.7.0-SNAPSHOT.jar  dest=/var/lib/tomcat7/webapps/
 
     - name: Restart Tomcat
-      service: name=tomcat7 state=restarted enabled=yes
+      service: name=tomcat state=restarted enabled=yes
