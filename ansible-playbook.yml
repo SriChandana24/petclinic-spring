@@ -1,0 +1,9 @@
+name: Deploying pet-clinic
+  hosts: localhost
+  tasks:
+   - name: Create a Directory /jars
+     become: yes
+     file:
+      path: /jars
+      state: directory
+       
