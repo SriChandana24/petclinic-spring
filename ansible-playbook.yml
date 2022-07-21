@@ -1,5 +1,5 @@
 name: Deploying pet-clinic
-  hosts: localhost
+  hosts: app_server
   tasks:
    - name: Create a Directory /jars
      become: yes

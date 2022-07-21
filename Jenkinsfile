@@ -41,7 +41,7 @@ pipeline {
 
         stage ('Deploy using Ansible')  {
             steps{
-                sh 'ansible-playbook ansible-playbook.yml'
+                sh 'ansible-playbook -i inv.ini ansible-playbook.yml'
             }
         }       
                 
