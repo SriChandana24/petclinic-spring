@@ -1,9 +1,9 @@
 name: Deploying pet-clinic
-  hosts: app_server
-  tasks:
-   - name: Create a Directory /jars
-     become: yes
-     file:
-      path: /jars
-      state: directory
+hosts: app_server
+tasks:
+  - name: Create a Directory /jars
+    become: yes
+    file:
+     path: /jars
+     state: directory
        
