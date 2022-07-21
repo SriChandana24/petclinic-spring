@@ -1,33 +1,29 @@
----
-  - name: Deploying pet-clinic
-    hosts: app_server
-    tasks:
-      - name: add group "tomcat"
-        group: name=tomcat
-        sudo: True
+- name: Deploying pet-clinic
+  hosts: app_server
+  
+  tasks:
+    - name: add group "tomcat"
+      group: name=tomcat
 
-      - name: add user "tomcat"
-        user: name=tomcat group=tomcat home=/usr/share/tomcat
-        sudo: True
+    - name: add user "tomcat"
+      user: name=tomcat group=tomcat home=/usr/share/tomcat
+      become: True
+      become_method: sudo      
 
-      - name: delete home dir for symlink of tomcat
-        shell: rm -fr /usr/share/tomcat
-        sudo: True
+    - name: install  Tomcat
+      yum: name=tomcat7 state=present
 
-      - name: install  Tomcat
-        yum: name=tomcat7 state=present
+    - name: Change ownership of Tomcat installation
+      file: path=/usr/share/tomcat/ owner=tomcat group=tomcat state=directory recurse=yes
 
-      - name: Change ownership of Tomcat installation
-        file: path=/usr/share/tomcat/ owner=tomcat group=tomcat state=directory recurse=yes
+    - name: Start Tomcat
+      service: name=tomcat7 state=started enabled=yes
 
-      - name: Start Tomcat
-        service: name=tomcat7 state=started enabled=yes
+    - name: wait for tomcat to start
+      wait_for: port={{http_port}}
 
-      - name: wait for tomcat to start
-        wait_for: port={{http_port}}              
+    - name: deploy application
+      get_url: url=http://3.110.222.216:8082/pet-clinic/spring-petclinic-2.7.0-SNAPSHOT.jar  dest=/var/lib/tomcat7/webapps/
 
-      - name: deploy application
-        get_url: url=http://3.110.222.216:8082/pet-clinic/spring-petclinic-2.7.0-SNAPSHOT.jar  dest=/var/lib/tomcat7/webapps/
-
-      - name: Restart Tomcat
-        service: name=tomcat7 state=restarted enabled=yes      
+    - name: Restart Tomcat
+      service: name=tomcat7 state=restarted enabled=yes
