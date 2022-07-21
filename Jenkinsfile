@@ -37,7 +37,13 @@ pipeline {
             steps {
                 sh 'curl -sSf -u admin:Artifactory1! -X PUT -T target/spring-petclinic-*-SNAPSHOT.jar http://13.233.159.66:8081/artifactory/pet-clinic/'
             }
-        }             
+        }    
+
+        stage ('Deploy using Ansible')  {
+            steps{
+                sh 'ansible-playbook ansible-playbook.yml'
+            }
+        }       
                 
     }
 
