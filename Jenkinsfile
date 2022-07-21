@@ -33,28 +33,9 @@ pipeline {
             }
         }  
 
-        stage ('Artifactory configuration') {
+        stage ('Artifactory Configuration') {
             steps {
-                rtServer (
-                    id: 'jfrog-artifactory-server',
-                    url: 'http://13.233.159.66:8081/artifactory',
-                    username: 'admin',
-                    password: 'Artifactory1!'
-
-                )
-
-                rtUpload (
-                    serverId: 'jfrog-artifactory-server',
-                    specPath: '/var/jenkins-new/workspace/pet-clinic/target/*.jar',
- 
-                    // Optional - Associate the uploaded files with the following custom build name and build number.
-                    // If not set, the files will be associated with the default build name and build number (i.e the
-                    // the Jenkins job name and number).
-                    //buildName: 'holyFrog',
-                    //buildNumber: '42',
-                    // Optional - Only if this build is associated with a project in Artifactory, set the project key as follows.
-                    project: 'pet-clinic'
-)
+                sh 'curl -sSf -u admin:Artifactory1! -X PUT -T target/spring-petclinic-*-SNAPSHOT.jar http://13.233.159.66:8081/artifactory/pet-clinic/'
             }
         }             
                 
