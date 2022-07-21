@@ -1,0 +1,16 @@
+pipeline {
+    
+    agent {
+            label 'maven'
+        } 
+    
+    stages {        
+                
+        stage ('deploy Pet-clinic') {
+
+            steps {                
+                    sh 'ansible-playbook -i inv.ini ansible-playbook.yml'                
+            }
+        }
+    }
+}

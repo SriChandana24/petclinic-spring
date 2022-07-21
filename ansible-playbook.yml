@@ -6,4 +6,9 @@
       file:
         path: /jars
         state: directory
-       
+    - name: download jar from Jfrog artifactory
+      get_url:
+        url: http://13.233.159.66:8082/ui/pet-clinic/spring-petclinic-2.7.0-SNAPSHOT.jar
+        dest: /jars
+    - name: Deploy the Jar file
+      ansible.builtin.shell: cd /jars ; java -jar spring-petclinic-2.7.0-SNAPSHOT.jar        
