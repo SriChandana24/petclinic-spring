@@ -14,18 +14,28 @@
 
     - name: install  Tomcat
       yum: name=tomcat state=present
+      become: True
+      become_user: root      
 
     - name: Change ownership of Tomcat installation
       file: path=/usr/share/tomcat/ owner=tomcat group=tomcat state=directory recurse=yes
+      become: True
+      become_user: root      
 
     - name: Start Tomcat
       service: name=tomcat state=started enabled=yes
+      become: True
+      become_user: root      
 
     - name: wait for tomcat to start
       wait_for: port={{http_port}}
 
     - name: deploy application
       get_url: url=http://3.110.222.216:8082/pet-clinic/spring-petclinic-2.7.0-SNAPSHOT.jar  dest=/var/lib/tomcat7/webapps/
-
+      become: True
+      become_user: root
+      
     - name: Restart Tomcat
       service: name=tomcat state=restarted enabled=yes
+      become: True
+      become_user: root
