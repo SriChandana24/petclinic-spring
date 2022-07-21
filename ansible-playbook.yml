@@ -16,10 +16,22 @@
         dest: /opt/jars
     - name: Make my directory tree readable
       become: yes
-      become_user: root      
+      become_user: root
       file:
         path: /opt/jars
         mode: 0755
-        recurse: yes     
-    - name: Deploy the Jar file
-      ansible.builtin.shell: cd /opt/jars ; java -jar spring-petclinic-2.7.0-SNAPSHOT.jar 
+        recurse: yes
+    - name: copy service file
+      become: yes
+      become_user: root    
+      copy:
+        src: /var/jenkins-new/workspace/DeployPetclinic/petclinic.service
+        dest: /etc/systemd/system/petclinic.service
+        mode: 0774
+    - name: running ...
+      become: yes
+      become_user: root    
+      systemd:
+        name: petclinic
+        state: started
+      
