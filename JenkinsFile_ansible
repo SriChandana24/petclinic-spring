@@ -1,0 +1,18 @@
+pipeline {
+    
+    agent {
+            label 'maven'
+        } 
+    
+    stages {           
+
+        stage ('Deploy using Ansible')  {
+            steps{
+                sh 'ansible-playbook -i inv.ini ansible-playbook.yml'
+            }
+        }       
+                
+    }
+
+
+}
