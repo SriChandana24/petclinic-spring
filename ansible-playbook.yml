@@ -1,14 +1,16 @@
 - name: Deploying pet-clinic
   hosts: app_server
-  
+
   tasks:
     - name: add group "tomcat"
       group: name=tomcat
+      become: True
+      become_user: root
 
     - name: add user "tomcat"
       user: name=tomcat group=tomcat home=/usr/share/tomcat
       become: True
-      become_method: sudo      
+      become_user: root
 
     - name: install  Tomcat
       yum: name=tomcat7 state=present
