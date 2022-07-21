@@ -2,7 +2,7 @@
 Description=petclinic Service
 
 [Service]
-ExecStart=/opt/jars/spring-petclinic-2.7.0-SNAPSHOT.jar 
+ExecStart=/bin/java -jar /opt/jars/spring-petclinic-2.7.0-SNAPSHOT.jar 
 
 [Install]
 WantedBy=multi-user.target
