@@ -12,7 +12,7 @@
       become: yes
       become_user: root    
       get_url:
-        url: http://3.110.222.216:8082/artifactory/pet-clinic/spring-petclinic-2.7.0-SNAPSHOT.jar
+        url: http://13.126.247.30:8082/artifactory/pet-clinic/spring-petclinic-2.7.0-SNAPSHOT.jar
         dest: /opt/jars
     - name: Make my directory tree readable
       become: yes
