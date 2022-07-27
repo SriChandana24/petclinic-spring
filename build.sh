@@ -1,4 +1,4 @@
-#!bin/bash
+
 
 # SET THE FOLLOWING VARIABLES
 # docker hub username

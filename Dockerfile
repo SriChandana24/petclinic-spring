@@ -1,5 +1,5 @@
 FROM openjdk:alpine
-WORKDIR /workspace/app1
+WORKDIR /workspace/appnew
 
 COPY VERSION .
 COPY target/spring-petclinic-2.7.0-SNAPSHOT.jar spring-petclinic-2.7.0-SNAPSHOT.jar
