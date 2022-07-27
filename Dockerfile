@@ -1,7 +1,7 @@
 FROM openjdk:alpine
 WORKDIR /workspace/app
-ARG version 
-ENV version $version
+
+COPY VERSION .
 COPY target/spring-petclinic-2.7.0-SNAPSHOT.jar spring-petclinic-2.7.0-SNAPSHOT.jar
 
 EXPOSE 8080

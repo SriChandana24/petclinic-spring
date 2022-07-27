@@ -40,14 +40,13 @@ pipeline {
         //     }
         // }  
 
-        stage ('Docker Image build ') {
+        stage ('Docker Image Configuration') {
 
             steps {   
-                       
-                    sh 'env version=$(git rev-parse --short HEAD)' 
+                    sh 'sudo service docker start'    
                     sh 'sudo docker login -u="srichandana" -p="docker@2022"'        
-                    sh 'sudo docker build --tag srichandana/petclinic:$version --build-arg version="$version" .' 
-                    sh 'sudo docker push srichandana/petclinic:v1.0'               
+                    sh 'sudo docker build --tag srichandana/petclinic:latest .' 
+                    sh 'sudo docker push srichandana/petclinic:latest'               
             }
         }       
                 
