@@ -1,0 +1,18 @@
+pipeline {
+    
+    agent {
+            label 'maven'
+        } 
+    
+    stages {        
+                
+        stage ('Docker Containerization') {
+
+            steps {                
+                    sh 'docker build --tag srichandana/petclinic:v1.0 -f /var/jenkins-new/workspace/DockerDeployPetclinic/Dockerfile'
+                    sh 'docker login -u="srichandana" -p="docker@2022"'
+                    sh 'docker push srichandana/petclinic:v1.0'               
+            }
+        }
+    }
+}
