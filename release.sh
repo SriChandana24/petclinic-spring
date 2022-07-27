@@ -6,7 +6,7 @@ IMAGE=petclinic
 # ensure we're up to date
 git pull
 # bump version
-#docker run --rm -v "$PWD":/app srichandana/petclinic patch
+docker run --rm -v "$PWD":/app srichandana/petclinic patch
 version=`cat VERSION`
 echo "version: $version"
 # run build
