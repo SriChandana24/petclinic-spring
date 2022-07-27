@@ -45,8 +45,9 @@ pipeline {
             steps {   
                     sh 'sudo service docker start'    
                     sh 'sudo docker login -u="srichandana" -p="docker@2022"'        
-                    sh 'sudo docker build --tag srichandana/petclinic:latest .' 
-                    sh 'sudo docker push srichandana/petclinic:latest'               
+                    sh 'sudo docker build --tag srichandana/petclinic:${BUILD_NUMBER} .'
+                    //sh 'docker tag srichandana/petclinic:latest srichandana/petclinic:${BUILD_NUMBER}'
+                    sh 'sudo docker push srichandana/petclinic:${BUILD_NUMBER}'               
             }
         }       
                 
