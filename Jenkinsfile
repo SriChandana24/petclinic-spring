@@ -43,7 +43,7 @@ pipeline {
         stage ('Docker Image build ') {
 
             steps {   
-                    sh 'cd /var/jenkins-new/workspace/petclinic/'             
+                    //sh 'cd /var/jenkins-new/workspace/petclinic/'             
                     sh 'sudo docker build --tag srichandana/petclinic:v1.0 .' 
                     sh 'sudo docker login -u="srichandana" -p="docker@2022"'
                     sh 'sudo docker push srichandana/petclinic:v1.0'               
