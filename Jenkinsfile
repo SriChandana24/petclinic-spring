@@ -13,12 +13,12 @@ pipeline {
             }
         }
 
-        stage('SonarQube Analysis') {
+        // stage('SonarQube Analysis') {
 
-            steps{
-                sh 'mvn sonar:sonar -Dsonar.host.url=http://3.108.250.217:9000/ -Dsonar.login=sqa_6efb7be29058cb368f8fc097a44f939b21f75993 -Dsonar.login=admin -Dsonar.password=sonarqube -Dsonar.junit.reportPaths=target/surefire-reports -Dsonar.java.binaries=target'
-            }
-        }
+        //     steps{
+        //         sh 'mvn sonar:sonar -Dsonar.host.url=http://3.108.250.217:9000/ -Dsonar.login=sqa_6efb7be29058cb368f8fc097a44f939b21f75993 -Dsonar.login=admin -Dsonar.password=sonarqube -Dsonar.junit.reportPaths=target/surefire-reports -Dsonar.java.binaries=target'
+        //     }
+        // }
 
         stage ('Compile Stage') {
 
@@ -33,12 +33,22 @@ pipeline {
             }
         }  
 
-        stage ('Artifactory Configuration') {
-            steps {
-                sh 'curl -sSf -u admin:Artifactory1! -X PUT -T target/spring-petclinic-*-SNAPSHOT.jar http://3.108.250.217:8081/artifactory/pet-clinic/'
-                sh 'curl -sSf -u admin:Artifactory1! -X PUT -T target/spring-petclinic-*-SNAPSHOT.jar http://3.108.250.217:8081/artifactory/pet-clinic/spring-petclinic-${BUILD_NUMBER}-SNAPSHOT.jar'
+        // stage ('Artifactory Configuration') {
+        //     steps {
+        //         sh 'curl -sSf -u admin:Artifactory1! -X PUT -T target/spring-petclinic-*-SNAPSHOT.jar http://3.108.250.217:8081/artifactory/pet-clinic/'
+        //         sh 'curl -sSf -u admin:Artifactory1! -X PUT -T target/spring-petclinic-*-SNAPSHOT.jar http://3.108.250.217:8081/artifactory/pet-clinic/spring-petclinic-${BUILD_NUMBER}-SNAPSHOT.jar'
+        //     }
+        // }  
+
+        stage ('Docker Image build ') {
+
+            steps {   
+                    sh 'cd /var/jenkins-new/workspace/petclinic/'             
+                    sh 'sudo docker build --tag srichandana/petclinic:v1.0 .' 
+                    sh 'sudo docker login -u="srichandana" -p="docker@2022"'
+                    sh 'sudo docker push srichandana/petclinic:v1.0'               
             }
-        }         
+        }       
                 
     }
 
