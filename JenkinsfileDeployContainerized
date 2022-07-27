@@ -9,7 +9,7 @@ pipeline {
         stage ('Docker Containerization') {
 
             steps {   
-                    sh 'cd var/jenkins-new/workspace/ContainerizedDeploy-Petclinic/'             
+                    sh 'cd /var/jenkins-new/workspace/ContainerizedDeploy-Petclinic/'             
                     sh 'docker build --tag srichandana/petclinic:v1.0 .' 
                     sh 'docker login -u="srichandana" -p="docker@2022"'
                     sh 'docker push srichandana/petclinic:v1.0'               
