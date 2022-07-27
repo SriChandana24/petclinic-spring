@@ -46,7 +46,7 @@ pipeline {
                        
                     sh 'env version=$(git rev-parse --short HEAD)' 
                     sh 'sudo docker login -u="srichandana" -p="docker@2022"'        
-                    sh 'sudo docker build --tag srichandana/petclinic:$version .' 
+                    sh 'sudo docker build --tag srichandana/petclinic:$version --build-arg version="$version" .' 
                     sh 'sudo docker push srichandana/petclinic:v1.0'               
             }
         }       
