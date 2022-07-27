@@ -1,7 +1,7 @@
 FROM openjdk:alpine
 WORKDIR /workspace/app
 
-COPY target/spring-petclinic-2.7.0-SNAPSHOT.jar spring-petclinic-2.7.0-SNAPSHOT.jar
+COPY /var/jenkins-new/workspace/pet-clinic/target/spring-petclinic-2.7.0-SNAPSHOT.jar spring-petclinic-2.7.0-SNAPSHOT.jar
 
 EXPOSE 8080
 
