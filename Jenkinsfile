@@ -54,7 +54,7 @@ pipeline {
         stage ('Deploy to EKS') {
 
             steps {   
-                    sh 'helm upgrade --install --values.image.tag:${BUILD_NUMBER} petclinic .'    
+                    sh 'helm upgrade --install petclinic --values.image.tag:${BUILD_NUMBER} .'    
                                   
             }
         } 
