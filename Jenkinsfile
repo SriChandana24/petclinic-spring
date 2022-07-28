@@ -49,7 +49,16 @@ pipeline {
                     //sh 'docker tag srichandana/petclinic:latest srichandana/petclinic:${BUILD_NUMBER}'
                     sh 'sudo docker push srichandana/petclinic:${BUILD_NUMBER}'               
             }
-        }       
+        } 
+
+        stage ('Deploy to EKS') {
+
+            steps {   
+                    sh 'helm upgrade --install --values.image.tag:${BUILD_NUMBER} petclinic .'    
+                                  
+            }
+        } 
+
                 
     }
 
