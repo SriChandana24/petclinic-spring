@@ -55,6 +55,7 @@ pipeline {
 
             steps {   
                     sh 'cd helm/pet-clinic'
+                    sh 'pwd'
                     sh 'helm upgrade --install petclinic --set image.tag=${BUILD_NUMBER} .'    
                                   
             }
