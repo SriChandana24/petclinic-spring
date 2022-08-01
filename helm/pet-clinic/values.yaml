@@ -14,7 +14,7 @@ nameOverride: "pet-clinic"
 fullnameOverride: "pet-clininc-chart"
 
 service:
-  type: NodePort
+  type: LoadBalancer
   port: 8080
 
 ingress:
