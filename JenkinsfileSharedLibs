@@ -2,6 +2,7 @@
 env.DOCKERIMAGE="petclinic"
 env.DOCKER_USERNAME="srichandana"
 env.DOCKER_PASSWORD="docker@2022"
+env.HELMCHART_NAME="pet-clinic"
 
 pipeline{
     agent {
@@ -36,7 +37,16 @@ pipeline{
         stage('Docker Build and Push'){
             steps{
                     docker()
-                    //k8s.helm_upgrade('pet-clinic')
+                    
+                
+            }
+        }
+        stage('Deploy to K8S cluster'){
+            steps{
+                script{
+                    k8s.helm_upgrade()
+                }
+                    
                 
             }
         }
