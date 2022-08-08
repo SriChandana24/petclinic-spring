@@ -1,4 +1,6 @@
 @Library('demo-lib') _
+env.DOCKERIMAGE="petclinic"
+
 pipeline{
     agent {
             label 'maven'
@@ -31,7 +33,7 @@ pipeline{
         }
         stage('Docker Image Configuration'){
             steps{
-                    docker("petclinic")
+                    docker()
                     //k8s.helm_upgrade('pet-clinic')
                 
             }
