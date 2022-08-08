@@ -1,0 +1,19 @@
+@Library('demo-lib') _
+pipeline{
+    agent {
+            label 'maven'
+        } 
+    stages{
+        stage('test'){
+            steps{
+                script{
+                    maven.install()
+                    maven.compile()
+                    maven.build()
+                    //docker.dockerize('petclinic')
+                    //k8s.helm_upgrade('pet-clinic')
+                }
+            }
+        }
+    }
+}
