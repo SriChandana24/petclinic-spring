@@ -31,11 +31,9 @@ pipeline{
         }
         stage('Docker Image Configuration'){
             steps{
-                script{
-                    
-                    docker.dockerize 'petclinic'
+                    docker 'petclinic'
                     //k8s.helm_upgrade('pet-clinic')
-                }
+                
             }
         }
     }
