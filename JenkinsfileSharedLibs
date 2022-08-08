@@ -1,5 +1,7 @@
 @Library('demo-lib') _
 env.DOCKERIMAGE="petclinic"
+env.DOCKER_USERNAME="srichandana"
+env.DOCKER_PASSWORD="docker@2022"
 
 pipeline{
     agent {
@@ -31,7 +33,7 @@ pipeline{
                 }
             }
         }
-        stage('Docker Image Configuration'){
+        stage('Docker Build and Push'){
             steps{
                     docker()
                     //k8s.helm_upgrade('pet-clinic')
