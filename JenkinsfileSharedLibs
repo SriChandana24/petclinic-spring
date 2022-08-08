@@ -33,7 +33,7 @@ pipeline{
             steps{
                 script{
                     
-                    docker.dockerize("petclinic")
+                    docker.dockerize 'petclinic'
                     //k8s.helm_upgrade('pet-clinic')
                 }
             }
