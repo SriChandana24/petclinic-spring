@@ -4,13 +4,36 @@ pipeline{
             label 'maven'
         } 
     stages{
-        stage('test'){
+        stage('Run Tests'){
             steps{
                 script{
                     maven.install()
+                }
+            }
+        }
+        stage('Compile Stage'){
+            steps{
+                script{
+                    
                     maven.compile()
+                    
+                }
+            }
+        }
+        stage('Build'){
+            steps{
+                script{
+                    
                     maven.build()
-                    //docker.dockerize('petclinic')
+                    
+                }
+            }
+        }
+        stage('Docker Image Configuration'){
+            steps{
+                script{
+                    
+                    docker.dockerize('petclinic')
                     //k8s.helm_upgrade('pet-clinic')
                 }
             }
