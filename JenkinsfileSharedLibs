@@ -44,7 +44,7 @@ pipeline{
         stage('Deploy to K8S cluster'){
             steps{
                 script{
-                    k8s.helm_upgrade()
+                    //k8s.helm_upgrade()
                 }
                     
                 
