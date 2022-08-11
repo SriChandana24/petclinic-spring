@@ -1,8 +1,11 @@
-@Library('demo-lib') _
+@Library('java_library') _
 env.DOCKERIMAGE="petclinic"
 env.DOCKER_USERNAME="srichandana"
 env.DOCKER_PASSWORD="docker@2022"
 env.HELMCHART_NAME="pet-clinic"
+env.SONAR_JFROG_SERVERIP=3.110.191.187
+env.SONAR_PORT=9000
+env.ARTIFACTORY_PORT=8081
 
 pipeline{
     agent {
@@ -14,6 +17,13 @@ pipeline{
                 script{
                     maven.install()
                 }
+            }
+        }
+        stage('SonarQube Analysis'){
+            steps{
+                
+                sonar()
+                
             }
         }
         stage('Compile Stage'){
@@ -34,13 +44,27 @@ pipeline{
                 }
             }
         }
-        stage('Docker Build and Push'){
+        stage('Artifactory Configuration'){
             steps{
-                    docker()
-                    
-                
+
+                artifactory()
             }
         }
+
+        stage ('Ansible Deploy') {
+
+            steps {                
+                    ansible()               
+            }
+        }
+
+        // stage('Docker Build and Push'){
+        //     steps{
+
+        //         docker()
+
+        //     }
+        // }
         // stage('Deploy to K8S cluster'){
         //     steps{
         //         script{
