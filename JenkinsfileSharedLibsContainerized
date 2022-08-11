@@ -1,8 +1,12 @@
 @Library('java_library') _
-
+env.DOCKERIMAGE="petclinic"
+env.DOCKER_USERNAME="srichandana"
+env.DOCKER_PASSWORD="docker@2022"
+env.HELMCHART_NAME="pet-clinic"
+env.AWS_EKS_CLUSTER="java_app"
+env.AWS_REGION="ap-south-1"
 env.SONAR_JFROG_SERVERIP='3.110.191.187'
 env.SONAR_PORT=9000
-env.ARTIFACTORY_PORT=8081
 
 pipeline{
     agent {
@@ -41,35 +45,21 @@ pipeline{
                 }
             }
         }
-        stage('Artifactory Configuration'){
+
+        stage('Docker Build and Push'){
             steps{
 
-                artifactory()
+                docker()
+
             }
         }
+         stage('Deploy to K8S cluster'){
+            steps{
 
-        stage ('Ansible Deploy') {
+                helm()
 
-            steps {                
-                    ansible()               
             }
         }
-
-        // stage('Docker Build and Push'){
-        //     steps{
-
-        //         docker()
-
-        //     }
-        // }
-        // stage('Deploy to K8S cluster'){
-        //     steps{
-        //         script{
-        //            k8s.helm_upgrade()
-        //         }
-                    
-                
-        //     }
-        // }
+    
     }
 }
