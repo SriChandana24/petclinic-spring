@@ -67,6 +67,7 @@ pipeline {
             always {
                 archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
                 junit 'target/surefire-reports/*.xml'
+                emailext body: 'The project $PROJECT_NAME with Build # $BUILD_NUMBER  is completed as $BUILD_STATUS!', subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', to: 'srichandana246@gmail.com'
             }
         }
         
