@@ -5,7 +5,7 @@ env.DOCKER_PASSWORD="docker@2022"
 env.HELMCHART_NAME="pet-clinic"
 env.AWS_EKS_CLUSTER="java-app"
 env.AWS_REGION="ap-south-1"
-env.SONAR_JFROG_SERVERIP='3.110.191.187'
+env.SONAR_JFROG_SERVERIP='15.206.163.202'
 env.SONAR_PORT=9000
 
 pipeline{
